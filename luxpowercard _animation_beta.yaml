@@ -1,0 +1,108 @@
+type: picture-elements
+image: /local/luxcardstatus/blankcard_2.png
+elements:
+  - type: image
+    entity: sensor.lux_status
+    style:
+      top: 50%
+      left: 77%
+    state_image:
+      '10': /local/luxcardstatus/_arrow_left.gif
+      '12': /local/luxcardstatus/_arrow_left_blank.png
+      '16': /local/luxcardstatus/_arrow_left_blank.png
+  - type: image
+    entity: sensor.lux_status
+    style:
+      top: 66%
+      left: 70%
+    state_image:
+      '10': /local/luxcardstatus/_arrow_left_blank.png
+      '12': /local/luxcardstatus/_arrow_down.gif
+      '16': /local/luxcardstatus/_arrow_down.gif
+  - type: image
+    entity: sensor.lux_status
+    style:
+      top: 50%
+      left: 26%
+    state_image:
+      '10': /local/luxcardstatus/_arrow_left_blank.png
+      '12': /local/luxcardstatus/_arrow_left.gif
+      '16': /local/luxcardstatus/_arrow_right.gif
+  - type: image
+    entity: sensor.lux_status
+    style:
+      top: 50%
+      left: 60%
+    state_image:
+      '10': /local/luxcardstatus/_arrow_left_blank.png
+      '12': /local/luxcardstatus/_arrow_right.gif
+      '16': /local/luxcardstatus/_arrow_right.gif
+  - type: image
+    entity: sensor.lux_status
+    style:
+      top: 30%
+      left: 34%
+    state_image:
+      '10': /local/luxcardstatus/_arrow_down.gif
+      '12': /local/luxcardstatus/_arrow_down.gif
+      '16': /local/luxcardstatus/_arrow_left_blank.png
+  - type: state-label
+    entity: sensor.lux_home_consumption_live
+    style:
+      color: black
+      left: 83%
+      top: 90%
+  - type: state-label
+    entity: sensor.lux_battery_flow
+    style:
+      color: black
+      left: 24%
+      top: 43%
+  - type: state-label
+    entity: sensor.lux_current_solar_output
+    style:
+      color: black
+      left: 56%
+      top: 12%
+  - type: state-label
+    entity: sensor.lux_power_from_grid_live
+    style:
+      color: black
+      left: 92%
+      top: 35%
+      animation: blink 2s linear infinite
+  - type: state-label
+    entity: sensor.lux_battery_percent
+    style:
+      color: black
+      left: 12%
+      top: 66%
+  - type: state-label
+    entity: sensor.lux_bms_limit_charge
+    prefix: 'BMS Charge Limit: '
+    style:
+      color: black
+      left: 12%
+      top: 70%
+      font-size: 40%
+  - type: state-label
+    entity: sensor.lux_bms_limit_charge
+    prefix: 'BMS Disharge Limit: '
+    style:
+      color: black
+      left: 11.5%
+      top: 73%
+      font-size: 40%
+  - type: state-label
+    entity: sensor.lux_battery_voltage
+    prefix: 'Battery Voltage: '
+    style:
+      color: black
+      left: 12.8%
+      top: 76%
+      font-size: 40%
+style: null
+border-radius: 0px
+border: solid 1px rgba(100,100,100,0.3)
+box-shadow: 3px 3px rgba(0,0,0,0.4)
+overflow: hidden

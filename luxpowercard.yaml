@@ -1,0 +1,77 @@
+type: picture-elements
+image: /local/luxcardstatus/lux-blankcard.png
+elements:
+  - type: image
+    entity: sensor.lux_status
+    state_image:
+      '0': /local/luxcardstatus/status0.png
+      '12': /local/luxcardstatus/status12.png
+      '16': /local/luxcardstatus/status16.png
+      '20': /local/luxcardstatus/status16.png
+      '32': /local/luxcardstatus/status32.png
+    tap_action: none
+    hold_action: none
+    style:
+      left: 50%
+      top: 50%
+      width: 100%
+      height: 100%
+  - type: state-label
+    entity: sensor.lux_home_consumption_live
+    style:
+      color: black
+      left: 83%
+      top: 90%
+  - type: state-label
+    entity: sensor.lux_battery_flow
+    style:
+      color: black
+      left: 13%
+      top: 32%
+  - type: state-label
+    entity: sensor.lux_current_solar_output
+    style:
+      color: black
+      left: 56%
+      top: 12%
+  - type: state-label
+    entity: sensor.lux_power_from_grid_live
+    style:
+      color: black
+      left: 92%
+      top: 35%
+  - type: state-label
+    entity: sensor.lux_battery_percent
+    style:
+      color: black
+      left: 5%
+      top: 55%
+  - type: state-label
+    entity: sensor.lux_bms_limit_charge
+    prefix: 'BMS Charge Limit: '
+    style:
+      color: black
+      left: 12%
+      top: 70%
+      font-size: 40%
+  - type: state-label
+    entity: sensor.lux_bms_limit_charge
+    prefix: 'BMS Disharge Limit: '
+    style:
+      color: black
+      left: 11.5%
+      top: 73%
+      font-size: 40%
+  - type: state-label
+    entity: sensor.lux_battery_voltage
+    prefix: 'Battery Voltage: '
+    style:
+      color: black
+      left: 12.8%
+      top: 76%
+      font-size: 40%
+style: null
+border-radius: 0px
+border: solid 1px rgba(100,100,100,0.3)
+box-shadow: 3px 3px rgba(0,0,0,0.4)
+overflow: hidden
