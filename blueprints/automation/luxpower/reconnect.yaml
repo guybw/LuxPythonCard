@@ -1,0 +1,38 @@
+blueprint:
+  name: LuxPower Reconnect
+  description: Schedule a reconnection if the last data received is x minutes (configurable) ago, reconnection is attemped every minute if it conenction fails afterwards.
+  domain: automation
+  input:
+    luxpower_time_entity:
+      name: LuxPower last data received entity
+      description: The last reveived entity.
+      selector:
+        entity:
+          domain: sensor
+    reconnect_check_interval:
+      name: Interval for the reconnection checking
+      description: Input the interval in minutes for triggering reconnection if data is not received in the specified time interval
+      default: 10.0
+      selector:
+        number:
+          min: 1.0
+          max: 60.0
+
+mode: single
+
+trigger:
+- platform: time_pattern
+  minutes: /1
+
+variables:
+  luxpowerTimeEntity: !input luxpower_time_entity
+  timeInterval: !input reconnect_check_interval
+
+condition:
+  - condition: template
+    value_template: "{{ now().timestamp() - state_attr(luxpowerTimeEntity, 'timestamp') > 60 * timeInterval }}"
+
+action:
+  - service: luxpower.luxpower_reconnect
+    data:
+      dongle: "{{ state_attr(luxpowerTimeEntity, 'dongle') }}"
