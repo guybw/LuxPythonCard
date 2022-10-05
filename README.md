@@ -6,6 +6,8 @@ LuxPythoncard is a custom card for Home Assistant for the LuxPowerTek Inverter. 
 
 # How to Install
 
+This isn't fully working yet, if you want access to the luxpower integration, you can email me at my username at hotmail dot com
+
 
 
 Copy the "luxpower" integration to your Home Assistant instance into the "custom_components" folder
