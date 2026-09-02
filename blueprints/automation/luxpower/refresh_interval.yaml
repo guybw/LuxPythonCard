@@ -4,43 +4,45 @@ blueprint:
   domain: automation
   input:
     luxpower_device:
-      name: Dongle Serial
-      description: this is the serial starting BA...
+      name: Luxpower Inverter
+      description: Select the inverter to refresh data from.
       selector:
         device:
           filter:
             - integration: luxpower
-    luxpower_refresh_time:
-      name: Interval for the refreshing data
+          multiple: false
+    luxpower_refresh_interval:
+      name: Refresh Interval
       description: Input the interval in seconds to refresh data.
       selector:
-        select:
-          options:
-            - label: '20'
-              value: '/20'
-            - label: '25'
-              value: '/25'
-            - label: '30'
-              value: '/30'
-            - label: '35'
-              value: '/35'
-            - label: '40'
-              value: '/40'
-            - label: '45'
-              value: '/45'
-            - label: '50'
-              value: '/55'
-            - label: '59'
-              value: '/59'
+        number:
+          max: 300
+          min: 20
+          step: 20
+      default: 120
+
 variables:
   luxpower_device_var: !input luxpower_device
+  refresh_interval_seconds: !input luxpower_refresh_interval
+  # Find the data_received_time entity from the luxpower device:
+  lux_data_received_time_entity: >
+    {{ device_entities(luxpower_device_var) | select("search", "data_received_time") | list | first }}
 
 trigger:
-  - platform: time_pattern
-    seconds: !input luxpower_refresh_time
+  # Template triggers only update every minute, so use time pattern to check every 20 seconds instead.
+  # It will only run if the condition below is true regardless of this time pattern value.
+  - trigger: time_pattern
+    seconds: /20
+
+conditions:
+  # Only update if the last update time is more than refresh interval ago (-1 second)
+  # The -1 second is to allow for slight deviation between the trigger and the last data received time.
+  - condition: template
+    value_template: >
+      {{now().timestamp() - state_attr(lux_data_received_time_entity, "timestamp") > refresh_interval_seconds - 1 }}
 
 action:
-  - service: luxpower.luxpower_refresh_registers
+  - action: luxpower.luxpower_refresh_registers
     data:
       dongle: >-
         {{ device_attr(luxpower_device_var, "name") }}
